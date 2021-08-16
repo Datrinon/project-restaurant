@@ -16,19 +16,44 @@ class Component {
     return main;
   }
 
-  header(title, img) {
+  header(title) {
     let header = document.createElement("header");
     let titleElem = document.createElement("h1");
     
-    header.classList.add("banner");
-    header.style.background = `url(${img})`;
+    header.id = "banner";
+    // header.style.background = `url(${img})`;
     
-    titleElem.classList.add("page-title");
+    titleElem.id = "page-title";
     titleElem.textContent = title;
     
     header.append(titleElem);
     
     return header;
+  }
+
+  navbar(...links) {
+    const nav = document.createElement("nav");
+    const linkContainer = document.createElement("ul");
+
+    nav.id = "navbar";
+    linkContainer.id = "navbar-buttons-container";
+
+    for (let link of links) {
+      const linkButton = document.createElement("li");
+      const linkAnchor = document.createElement("a");
+
+      linkButton.classList.add("navbar-button");
+      
+      linkAnchor.textContent = link;
+      linkAnchor.setAttribute("href", "#");
+
+      linkButton.append(linkAnchor);
+      linkContainer.append(linkButton);
+    }
+
+    nav.append(linkContainer);
+
+    return linkContainer;
   }
 
   footer() {
@@ -43,11 +68,13 @@ const onLoad = (() => {
   const body = document.body;
   const Components = new Component();
   const main = Components.main();
-  const header = Components.header("Beachside Kitchens", Banner);
+  const header = Components.header("Ocean Kitchen", Banner);
+  const navbar = Components.navbar("Home", "Menu", "Visit");
   const footer = Components.footer();
   
-
-  main.append(header)
+  header.append(navbar);
+  
+  main.append(header);
 
   body.append(main);
   body.append(footer);

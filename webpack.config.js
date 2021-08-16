@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Project Restaurant',
+      title: 'Ocean Kitchen',
     }),
   ],
   output: {
