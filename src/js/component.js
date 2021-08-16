@@ -1,15 +1,4 @@
-"use strict"
-
-import "@fortawesome/fontawesome-free/js/all.js";
-import "@fortawesome/fontawesome-free/css/all.css";
-
-import './css/reset.css';
-import './css/sticky-footer.css';
-import './css/index.css';
-
-import Banner from './image/beachhouse.jpg';
-
-class Component {
+export class Component {
   constructor() {
 
   }
@@ -71,6 +60,24 @@ class Component {
     return nav;
   }
 
+  banner(text, img) {
+    let bannerContainer = document.createElement("figure");
+    let banner = document.createElement("div");
+    let caption = document.createElement("figcaption");
+    
+    bannerContainer.id = "banner";
+    banner.id = "banner-image";
+    caption.id = "banner-caption";
+
+    banner.style.backgroundImage = `url(${img})`;
+
+    caption.textContent = text;
+
+    bannerContainer.append(banner, caption);
+
+    return bannerContainer;
+  }
+
   footer() {
     let footer = document.createElement("footer");
     footer.classList.add("footer");
@@ -83,20 +90,26 @@ class Component {
 
     return footer;
   }
+
+  /**
+   * Create an element with larger, emboldened, text,
+   * similar to a pull quote in a magazine.
+   * 
+   * @param msg {string} Text to include in the block quote
+   */
+  pullquote(msg) {
+    let pull = document.createElement("aside");
+    pull.textContent = msg;
+
+    pull.classList.add("pull-quote");
+
+    return msg;
+  }
+
+  section() {
+    let element = document.createElement("section");
+    element.classList("section");
+
+    return element;
+  }
 }
-
-const onLoad = (() => {
-  const body = document.body;
-  const Components = new Component();
-
-  const main = Components.content();
-  const header = Components.header("Ocean Kitchen", Banner);
-  const navbar = Components.navbar("Home", "Menu", "Visit");
-  const footer = Components.footer();
-  
-  main.append(header);
-  header.append(navbar);
-
-  body.append(main);
-  body.append(footer);
-})();

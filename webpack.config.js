@@ -1,11 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = {
   // entry: './src/index.js',
   mode: 'development',
   entry: {
-    index: './src/index.js',
+    index: './src/js/index.js',
+    component: './src/js/component.js',
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -14,6 +16,30 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Ocean Kitchen',
+    }),
+    new ImageMinimizerPlugin({
+      severityError: "warning", // Ignore errors on corrupted images
+      minimizerOptions: {
+        plugins: [
+          // Name
+          "gifsicle",
+          // Name with options
+          ["mozjpeg", { quality: 80 }],
+          // Full package name
+          [
+            "imagemin-svgo",
+            {
+              plugins: [
+                {
+                  removeViewBox: false,
+                },
+              ],
+            },
+          ],
+        ],
+      },
+      // Disable `loader`
+      loader: false,
     }),
   ],
   output: {

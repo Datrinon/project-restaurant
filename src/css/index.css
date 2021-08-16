@@ -33,6 +33,27 @@
   height: 100%;
 }
 
+#banner {
+  width: 100%;
+  height: 600px;
+  max-height: 40vh;
+}
+
+#banner-image {
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+}
+
+#banner-caption {
+  position: relative;
+  bottom: 25px;
+  left: 0%;
+  text-align: center;
+}
+
+
 .navbar-button {
   display: inline-block;
 }
