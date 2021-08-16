@@ -53,10 +53,16 @@
   text-align: center;
 }
 
-
 .navbar-button {
   display: inline-block;
 }
+
+.pull-quote {
+  font-size: 1.25em;
+  font-weight: bolder;
+  text-align: center;
+}
+
 
 /* For small devices, collapse the header and navbar */
 @media (max-width: 600px) {

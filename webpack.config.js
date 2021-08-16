@@ -18,16 +18,15 @@ module.exports = {
       title: 'Ocean Kitchen',
     }),
     new ImageMinimizerPlugin({
-      severityError: "warning", // Ignore errors on corrupted images
       minimizerOptions: {
+        // Lossless optimization with custom option
+        // Feel free to experiment with options for better result for you
         plugins: [
-          // Name
-          "gifsicle",
-          // Name with options
-          ["mozjpeg", { quality: 80 }],
-          // Full package name
+          ['gifsicle', { interlaced: true }],
+          ['jpegtran', { progressive: true }],
+          ['optipng', { optimizationLevel: 5 }],
           [
-            "imagemin-svgo",
+            'svgo',
             {
               plugins: [
                 {
@@ -38,8 +37,6 @@ module.exports = {
           ],
         ],
       },
-      // Disable `loader`
-      loader: false,
     }),
   ],
   output: {

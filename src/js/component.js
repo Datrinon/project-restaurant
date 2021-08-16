@@ -103,13 +103,34 @@ export class Component {
 
     pull.classList.add("pull-quote");
 
-    return msg;
+    return pull;
   }
 
   section() {
     let element = document.createElement("section");
-    element.classList("section");
+    element.classList.add("section");
 
     return element;
+  }
+
+  /**
+   * Creates a text heading element.
+   * 
+   * @param {*} text - The label for the header.
+   * @param {*} level - The level of header.
+   */
+  heading(text, level) {
+    if (level < 1 || level > 6) {
+      throw Error("Heading levels can only be between 1 to 6!");
+    }
+    let header = document.createElement(`h${level}`);
+  }
+
+  paragraph(text) {
+    let p = document.createElement("p");
+
+    p.textContent = text;
+
+    return p;
   }
 }

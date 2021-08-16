@@ -21,7 +21,9 @@ const onLoad = (() => {
   const banner = Components.banner("Enjoy outdoor dining with an ocean breeze", RestaurantImg);
   const navbar = Components.navbar("Home", "Menu", "Visit");
   const footer = Components.footer();
+  
   const home = Components.section();
+  const homeBiography = // Import this through JSON please.
 
   // details
   const hookMessage = Components.pullquote("Since 2021. The Pacific's finest seafood.");
@@ -30,6 +32,7 @@ const onLoad = (() => {
   main.append(header);
   main.append(banner);
   
+  main.append(home);
   home.append(hookMessage);
 
   body.append(main);
