@@ -133,4 +133,20 @@ export class Component {
 
     return p;
   }
+
+  img(url, ...className) {
+    let image = new Image();
+    image.classList.add([...className]);
+
+    image.src = url;
+
+    return image;
+  }
+
+  div(...className) {
+    let div = document.createElement("div");
+    div.classList.add([...className]);
+
+    return div;
+  }
 }

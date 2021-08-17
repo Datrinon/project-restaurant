@@ -9,7 +9,12 @@ import '../css/reset.css';
 import '../css/sticky-footer.css';
 import '../css/index.css';
 
+import Bio from '../text/bio.txt';
+
 import RestaurantImg from '../image/beachhouse.jpg';
+import mealpic1 from '../image/clams.jpg';
+import mealpic2 from '../image/lobster.jpg';
+import mealpic3 from '../image/salmon.jpg';
 
 
 const onLoad = (() => {
@@ -23,10 +28,17 @@ const onLoad = (() => {
   const footer = Components.footer();
   
   const home = Components.section();
-  const homeBiography = // Import this through JSON please.
+  const homeBiography = Components.paragraph(Bio);
+  
+  const homeImgContainer = Components.div("home-images");
+  const homeImages = [Components.img(mealpic1, "meal"),
+  Components.img(mealpic2, "meal"),
+  Components.img(mealpic3, "meal"),
+  ];
+
 
   // details
-  const hookMessage = Components.pullquote("Since 2021. The Pacific's finest seafood.");
+  const hookMessage = Components.pullquote("Serving fresh Pacific catches since 2001.");
   
   header.append(navbar); 
   main.append(header);
@@ -34,6 +46,11 @@ const onLoad = (() => {
   
   main.append(home);
   home.append(hookMessage);
+  home.append(homeBiography);
+
+  home.append(homeImgContainer);
+  homeImgContainer.append(...homeImages);
+
 
   body.append(main);
   body.append(footer);
