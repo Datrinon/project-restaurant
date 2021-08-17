@@ -1,6 +1,18 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+:root {
+  --primary-button-color: hsl(45, 100%, 50%);
+  --primary-button-border-color: hsl(45, 100%, 30%);
+}
+
+.content > *:not(#header) {
+  margin: 5px;
+}
+
+.section > * {
+  margin: 5px 0;
+}
 
 .no-display {
   display: none;
@@ -11,6 +23,11 @@
   color: black;
   font-size: 2.5em;
   text-transform: uppercase;
+}
+
+#menu-button {
+  position: relative;
+  right: 10px;
 }
 
 #header {
@@ -61,8 +78,29 @@
   font-size: 1.25em;
   font-weight: bolder;
   text-align: center;
+  font-style: italic;
 }
 
+.home-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.meal {
+  width: 30vw;
+  max-width: 400px;
+}
+
+.primary-button {
+  all: unset;
+  display: block;
+  margin: 0 auto;
+  background-color: var(--primary-button-color);
+  border: 1px solid var(--primary-button-border-color);
+  height: 3em;
+  padding: 5px;
+}
 
 /* For small devices, collapse the header and navbar */
 @media (max-width: 600px) {
@@ -85,6 +123,23 @@
   }
 
   #menu-button {
-    display: unset;
+    display: inline;
   }
+
+  .home-images {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 80vh;
+    align-items: center;
+  }
+  
+  .meal {
+    height: 20vh;
+    width: 80%;
+    max-width: 600px;
+    object-fit: cover;
+    border: 1px solid black;
+  }
+  
 }

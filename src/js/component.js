@@ -1,6 +1,9 @@
 export class Component {
-  constructor() {
+  
+  mql = window.matchMedia('(max-width: 600px)');
 
+  constructor() {
+    
   }
 
   content() {
@@ -22,6 +25,14 @@ export class Component {
 
     menuButton.id = "menu-button";
     menuButton.classList.add("fas", "fa-bars", "no-display");
+
+    this.mql.addEventListener("change", (e) => {
+      if (e.matches) {
+        menuButton.classList.remove("no-display");
+      } else {
+        menuButton.classList.add("no-display");
+      }
+    });
     
     header.id = "header";
     // header.style.background = `url(${img})`;
@@ -148,5 +159,13 @@ export class Component {
     div.classList.add([...className]);
 
     return div;
+  }
+
+  button(label, ...className) {
+    let btn = document.createElement("button");
+    btn.classList.add([...className]);
+
+    btn.textContent = label;
+    return btn;
   }
 }

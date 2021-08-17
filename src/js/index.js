@@ -2,8 +2,8 @@
 
 import { Component } from "./component";
 
-import "@fortawesome/fontawesome-free/js/solid.js";
-import "@fortawesome/fontawesome-free/css/solid.css";
+import "@fortawesome/fontawesome-free/js/all.js";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 import '../css/reset.css';
 import '../css/sticky-footer.css';
@@ -21,7 +21,10 @@ const onLoad = (() => {
   const body = document.body;
   const Components = new Component();
 
-  const main = Components.content();
+  const mainWrapper = Components.content();
+  body.append(mainWrapper);
+  const main = mainWrapper.querySelector(".main")
+
   const header = Components.header("Ocean Kitchen");
   const banner = Components.banner("Enjoy outdoor dining with an ocean breeze", RestaurantImg);
   const navbar = Components.navbar("Home", "Menu", "Visit");
@@ -36,12 +39,14 @@ const onLoad = (() => {
   Components.img(mealpic3, "meal"),
   ];
 
+  const homePullQuote = Components.pullquote("Come visit us today in Marin and Monterey.")
+  const homeToVisitButton = Components.button("Get Directions", "primary-button");
 
   // details
   const hookMessage = Components.pullquote("Serving fresh Pacific catches since 2001.");
   
   header.append(navbar); 
-  main.append(header);
+  mainWrapper.insertBefore(header, main);
   main.append(banner);
   
   main.append(home);
@@ -51,7 +56,8 @@ const onLoad = (() => {
   home.append(homeImgContainer);
   homeImgContainer.append(...homeImages);
 
+  home.append(homePullQuote, homeToVisitButton);
 
-  body.append(main);
   body.append(footer);
+  
 })();
