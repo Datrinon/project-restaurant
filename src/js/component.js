@@ -30,8 +30,20 @@ export class Component {
       if (e.matches) {
         menuButton.classList.remove("no-display");
       } else {
+        // it bigger than the query rule.
         menuButton.classList.add("no-display");
+        document.querySelector("#navbar").classList.remove("slide-in-out");
       }
+    });
+
+    //// TODO: Come back later and figure out why this isn't working.
+    // Webpack and not instantiated in memory?
+    // Because it also doesn't work in the OnLoad() function.
+    // SOL: > The problem is that the element is recreated by font awesome,
+    // it turns from an i to an svg.
+    menuButton.addEventListener("click", (e) => {
+      console.log("menu pressed.");
+      document.querySelector("#navbar").classList.toggle("slide-in-out");
     });
     
     header.id = "header";
@@ -117,8 +129,9 @@ export class Component {
     return pull;
   }
 
-  section() {
+  section(id) {
     let element = document.createElement("section");
+    element.id = id;
     element.classList.add("section");
 
     return element;

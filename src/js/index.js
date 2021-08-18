@@ -30,7 +30,7 @@ const onLoad = (() => {
   const navbar = Components.navbar("Home", "Menu", "Visit");
   const footer = Components.footer();
   
-  const home = Components.section();
+  const home = Components.section("home");
   const homeBiography = Components.paragraph(Bio);
   
   const homeImgContainer = Components.div("home-images");
@@ -39,7 +39,7 @@ const onLoad = (() => {
   Components.img(mealpic3, "meal"),
   ];
 
-  const homePullQuote = Components.pullquote("Come visit us today in Marin and Monterey.")
+  const homePullQuote = Components.pullquote("Come visit us today in Marin.")
   const homeToVisitButton = Components.button("Get Directions", "primary-button");
 
   // details
@@ -47,9 +47,9 @@ const onLoad = (() => {
   
   header.append(navbar); 
   mainWrapper.insertBefore(header, main);
-  main.append(banner);
   
   main.append(home);
+  home.append(banner);
   home.append(hookMessage);
   home.append(homeBiography);
 
@@ -60,4 +60,32 @@ const onLoad = (() => {
 
   body.append(footer);
   
+  // Potential issue
+  // Could be because the DOM hasn't loaded the element yet.
+  // maybe, because #header works OK.
+  // it's the way that FontAwesome works, it commented out the i and replaced
+  // it with an SVG element. I'm guessing that it happened sometime after
+  // the event listener was assigned.
+  
+  body.querySelector("#menu-button").addEventListener("click", (e) => {
+    console.log("menu pressed.");
+    document.querySelector("#navbar").classList.toggle("slide-in-out");
+  });
+
+  // console.log("Dab boi");
 })();
+
+
+//// TODO: Current workaround. So this is probably OK.
+window.addEventListener('load', function () {
+    document.querySelector("#menu-button").addEventListener("click", (e) => {
+      console.log("menu pressed.");
+      document.querySelector("#navbar").classList.toggle("slide-in-out");
+    });
+})
+
+
+    // menuButton.addEventListener("click", (e) => {
+    //   console.log("menu pressed.");
+    //   document.querySelector("#navbar").classList.toggle("slide-in-out");
+    // });

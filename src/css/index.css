@@ -30,15 +30,30 @@
   right: 10px;
 }
 
+#menu-button:hover {
+  text-shadow: #CCC 1px 0 10px;
+}
+
+
 #header {
   border: 1px solid black;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: fit-content;
 }
 
 #navbar {
   width: 50vw;
+  transition: max-height 1.1s ease-in !important;
+  max-height: 300px;
+}
+
+.slide-in-out {
+  max-height: 0 !important;
+  overflow: hidden;
+  /* transition: max-height 0.75s ease-out !important; */
+  /* Don't use display: none or else animations won't work. */
 }
 
 #navbar-buttons-container {
@@ -68,6 +83,7 @@
   bottom: 25px;
   left: 0%;
   text-align: center;
+  color: white;
 }
 
 .navbar-button {
@@ -130,7 +146,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 80vh;
+    height: 75vh;
     align-items: center;
   }
   
