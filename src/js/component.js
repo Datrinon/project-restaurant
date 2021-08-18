@@ -76,6 +76,17 @@ export class Component {
 
       linkButton.append(linkAnchor);
       linkContainer.append(linkButton);
+
+      linkAnchor.addEventListener("click", (e) => {
+        let currentSectionId = document.querySelector(".main > section:not(.no-display)").id.toLowerCase();
+        let chosenSectionId = e.currentTarget.textContent.toLowerCase();
+
+        if (currentSectionId !== chosenSectionId) {
+          document.querySelector(`#${currentSectionId}`).classList.add("no-display");
+          document.querySelector(`#${chosenSectionId}`).classList.remove("no-display");
+        }
+
+      });
     }
 
     nav.append(linkContainer);
@@ -148,6 +159,10 @@ export class Component {
       throw Error("Heading levels can only be between 1 to 6!");
     }
     let header = document.createElement(`h${level}`);
+
+    header.textContent = text;
+
+    return header;
   }
 
   paragraph(text) {

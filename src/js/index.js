@@ -8,6 +8,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import '../css/reset.css';
 import '../css/sticky-footer.css';
 import '../css/index.css';
+import '../css/menu.css';
 
 import Bio from '../text/bio.txt';
 
@@ -45,6 +46,17 @@ const homeSection = (() => {
   return home;
 })();
 
+const menuSection = (() => {
+  const c = new Component();
+
+  const menu = c.section("menu");
+  const title = c.heading("Menu", 1);
+
+  menu.append(title);
+  menu.classList.add("no-display");
+  
+  return menu;
+})();
 
 const onLoad = (() => {
   const body = document.body;
@@ -65,6 +77,7 @@ const onLoad = (() => {
   body.append(footer);
 
   main.append(homeSection);
+  main.append(menuSection);
 
   window.addEventListener('load', function () {
     document.querySelector("#menu-button").addEventListener("click", (e) => {
