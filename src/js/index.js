@@ -118,11 +118,20 @@ const visitSection =(() => {
   const c = new Component();
 
   const visitWrapper = c.section("visit");
-  const visit = c.section("visitContent");
+  const visit = c.section("visit-content");
+  
+  const bg = c.div("visit-bg");
+  // TODO: Write down that you need to have zIndex positioned to use it right.
+  bg.style.backgroundImage = `url(${RestaurantInteriorImg})`;
+  bg.style.zIndex = 0;
+  visit.style.zIndex = 1;
+  visit.style.backgroundColor = "rgba(0,0,0,0)";
+  // visit.style.backgroundImage = `url(${RestaurantInteriorImg})`; // this works ??
 
-  visitWrapper.append(visit);
+
+  visitWrapper.append(bg, visit);
   visitWrapper.classList.add("no-display");
-  visitWrapper.style.backgroundImage = `url(${RestaurantInteriorImg})`;
+  
   
   const title = c.heading("Come Visit Us", 2);
 

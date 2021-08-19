@@ -1,3 +1,26 @@
+#visit {
+}
+
+.visit-bg{
+  position: fixed;
+  display: block;
+  width: 105vw;
+  height: 105vh;
+  filter: blur(2px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  left: -17px;
+  top: 41px;
+}
+
+#visit-content {
+  display: block;
+  position: fixed;
+  left: 0;
+  /* top: 0; */
+}
+
 #hours-table th {
   border: 1px solid black;
   padding: 0 50px;
@@ -8,4 +31,25 @@
   text-align: center;
   border: 1px solid black;
   padding: 10px;
+}
+
+#directions-schedule {
+  display: flex;
+}
+
+.directions-section {
+  width: 75%;
+}
+
+.schedule-section {
+  width: 25%;
+}
+
+.contact-section {
+  text-align: center;
+}
+
+.contac-section > svg {
+  transform: scale(3);
+  color:white;
 }
