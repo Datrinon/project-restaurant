@@ -9,15 +9,18 @@ import '../css/reset.css';
 import '../css/sticky-footer.css';
 import '../css/index.css';
 import '../css/menu.css';
+import '../css/visit.css';
 
 import Bio from '../data/bio.txt';
 import Menu from '../data/entrees.json';
 import Hours from '../data/schedule.csv';
 
 import RestaurantImg from '../image/beachhouse.jpg';
+import RestaurantInteriorImg from '../image/restaurant.jpg';
 import mealpic1 from '../image/clams.jpg';
 import mealpic2 from '../image/lobster.jpg';
 import mealpic3 from '../image/salmon.jpg';
+
 
 function importAll(r) {
 
@@ -122,18 +125,34 @@ const visitSection =(() => {
 
   const visit = c.section("visit");
   const title = c.heading("Come Visit Us", 2);
+
+  const banner = c.banner("", RestaurantInteriorImg);
+
+  const addressDiv = c.div("directions-section");
   const addrHeading = c.heading("Address", 3);
   const address = c.paragraph("1000 Great Highway, San Francisco, CA 94121");
   const map = initializeMap(document.createElement("iframe"));
-  const hourHeading = c.heading("Hours", 3);
+  addressDiv.append(addrHeading, address, map);
   
+  const scheduleDiv = c.div("schedule-section");
+  const hourHeading = c.heading("Hours", 3);
   const schedule = c.table("hours-table", Hours);
+  scheduleDiv.append(hourHeading, schedule);
   // alert(JSON.stringify(Hours));
 
+  const contactDiv = c.div("contact-section");
+  const contactHeading = c.heading("Contact Us", 3);
+  const contactIcons = [c.faIcon("fab", "fa-facebook-messenger", "contact-icon"), c.faIcon("fab", "fa-instagram-square", "contact-icon")
+  , c.faIcon("fab", "fa-twitter-square", "contact-icon")];
+  contactDiv.append(contactHeading, ...contactIcons);
 
 
-  visit.append(title, addrHeading, address, map, hourHeading, schedule);
-
+  visit.append(title, banner, addressDiv, scheduleDiv, contactDiv); // either this is legal or I use spread
+    // [...] was not legal
+    // ...array was legal. 
+    // TODO dan write this down.
+    // TODO also write down this visitSection, this a good way to format 
+    // code
   return visit;
 })();
 

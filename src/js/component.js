@@ -237,4 +237,11 @@ export class Component {
     
     return table;
   }
+
+  faIcon(category, name, ...className){
+    let fasIcon = document.createElement("i");
+    fasIcon.classList.add(category, name, className);
+
+    return fasIcon;
+  }
 }
