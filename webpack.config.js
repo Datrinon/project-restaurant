@@ -59,6 +59,15 @@ module.exports = {
       {
         test: /\.txt$/i,
         type: 'asset/source',
+      },
+      {
+        test: /\.(csv)$/i,
+        loader: 'csv-loader',
+        options: {
+          dynamicTyping: true,
+          header: true,
+          skipEmptyLines: true
+        }
       }
     ],
   },

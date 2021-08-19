@@ -10,14 +10,24 @@ import '../css/sticky-footer.css';
 import '../css/index.css';
 import '../css/menu.css';
 
-import Bio from '../text/bio.txt';
+import Bio from '../data/bio.txt';
+import Menu from '../data/entrees.json';
+import Hours from '../data/schedule.csv';
 
 import RestaurantImg from '../image/beachhouse.jpg';
 import mealpic1 from '../image/clams.jpg';
 import mealpic2 from '../image/lobster.jpg';
 import mealpic3 from '../image/salmon.jpg';
 
+function importAll(r) {
 
+  // keys() get the key which is a filepath (called the request on node)
+  // map() maps the fp to an array element.
+  let images = {};
+  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  return images;
+  // return r.keys().map(r);
+}
 
 const homeSection = (() => {
   const Components = new Component();
@@ -46,6 +56,7 @@ const homeSection = (() => {
   return home;
 })();
 
+
 const menuSection = (() => {
   const c = new Component();
 
@@ -55,7 +66,75 @@ const menuSection = (() => {
   menu.append(title);
   menu.classList.add("no-display");
   
+  const images = importAll(require.context('../image', false, /\.(png|jpe?g|svg)$/));
+  // let dirpath = /^.+\//[Symbol.match](images[0][0]); //match returns an array, so we use [0] to retrieve match.
+  // console.log(dirpath);
+  //! Cannot use dirpath, since the image name is jumbled hash when exported to dist. You don't know which is which.
+  //! Cannot use path, as this is a server node process, not the browser
+  //// const path = require('path');
+
+  //// console.log(path.resolve('../images'));
+  // remember require.context returns a function that will give you the right path... so you need to call it.
+
+  console.log(require.context('../image', false, /\.(png|jpe?g|svg)$/).keys().map((key, index) => {
+    console.log(key, index);
+    console.log(require.context('../image', false, /\.(png|jpe?g|svg)$/)(key));
+  }));
+
+  for (let section in Menu) {
+    let sectionDiv = c.div("menu-area");
+    let sectionHeading = c.heading(section, 2);
+
+    sectionDiv.append(sectionHeading);
+    let entreesDiv = c.div("entrees-area");
+    for (let entree of Menu[section]) {
+      let entreeDiv = c.div("entree");
+      let name = c.heading(entree.name, 3);
+      let price = c.paragraph(entree.price);
+      let description = c.paragraph(entree.description);
+      let img = c.img(images[entree.image], "entree-pic");
+      
+      c.paragraph("Image here");
+      entreeDiv.append(img, name, price, description);
+      entreesDiv.append(entreeDiv);
+    }
+
+    sectionDiv.append(entreesDiv);
+    menu.append(sectionDiv);
+  }
+  
   return menu;
+})();
+
+const visitSection =(() => {
+  function initializeMap(map) {
+    map.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1446.0598245802353!2d-122.51133701257287!3d37.76944511330641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808587b9137328d5%3A0x5779caf7adb5889c!2sBeach%20Chalet%20Brewery%20and%20Restaurant!5e0!3m2!1sen!2sus!4v1629385295743!5m2!1sen!2sus";
+    map.width = 600;
+    map.height = 450;
+    map.style.border = "0";
+    map.allowFullscreen = "";
+    map.setAttribute("loading", "lazy");
+
+    return map;
+  }
+  
+  const c = new Component();
+
+  const visit = c.section("visit");
+  const title = c.heading("Come Visit Us", 2);
+  const addrHeading = c.heading("Address", 3);
+  const address = c.paragraph("1000 Great Highway, San Francisco, CA 94121");
+  const map = initializeMap(document.createElement("iframe"));
+  const hourHeading = c.heading("Hours", 3);
+  
+  const schedule = c.table("hours-table", Hours);
+  // alert(JSON.stringify(Hours));
+
+
+
+  visit.append(title, addrHeading, address, map, hourHeading, schedule);
+
+  return visit;
 })();
 
 const onLoad = (() => {
@@ -78,6 +157,7 @@ const onLoad = (() => {
 
   main.append(homeSection);
   main.append(menuSection);
+  main.append(visitSection);
 
   window.addEventListener('load', function () {
     document.querySelector("#menu-button").addEventListener("click", (e) => {

@@ -1,0 +1,29 @@
+#menu {
+  margin: 0 25%;
+}
+
+.entrees-area {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 50%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.entree {
+  border: 1px solid black;
+  width: 45%;
+  text-align: center;
+  min-width: 300px;
+  max-width: 500px;
+  margin: 0 15px;
+}
+
+.entree-pic {
+  width: 80%;
+  max-width: 400px;
+}
+
+/* 
+To get a two-column 
+ */

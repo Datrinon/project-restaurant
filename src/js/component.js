@@ -196,4 +196,45 @@ export class Component {
     btn.textContent = label;
     return btn;
   }
+
+  /**
+   * Generates a basic table with single-cell columns and rows, based on the imported file.
+   * 
+   * @param {csv} data - Data to turn into a table. Please use webpack to import .csv files.
+   */
+  table(id = "", data) {
+    let table = document.createElement("table");
+    table.id = id;
+    
+    // Generate a table header row.
+    let tableHeader = document.createElement("thead");
+    let tableHeaderRow = document.createElement("tr");
+
+    for (let col of Object.keys(data[0])) {
+      let colCell = document.createElement("th");
+      colCell.textContent = col;
+
+      tableHeaderRow.append(colCell);
+    }
+    tableHeader.append(tableHeaderRow);
+    
+    table.append(tableHeader);
+
+    const tableBody = document.createElement("tbody");
+    // Generate table rows.
+    for (let i = 0; i < data.length; i++) {
+      let trow = document.createElement("tr");
+      for (let prop in data[i]) {
+        let tcell = document.createElement("td");
+        
+        tcell.textContent = data[i][prop];
+        trow.append(tcell);
+      }
+
+      tableBody.append(trow);      
+    }
+    table.append(tableBody);
+    
+    return table;
+  }
 }

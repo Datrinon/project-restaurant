@@ -24,13 +24,13 @@
       "name": "Clam Chowder",
       "price": 15.99,
       "description": "A bowl of hearty New England Clam Chowder, served with sourdough bread.",
-      "image": "tacobite.jpg"
+      "image": "clamchowder.jpg"
     },
     {
       "name": "Miso Soup",
       "price": 6.99,
       "description": "A sweet, mellow bowl of umami miso soup.",
-      "image": "tacobite.jpg"
+      "image": "miso.jpg"
     }
   ],
   "entrees": [
@@ -38,25 +38,31 @@
       "name": "Shrimp Linguine",
       "price": 16.49,
       "description": "A bright and lemony shrimp pasta dish.",
-      "image": "tacobite.jpg"
+      "image": "shrimplinguine.jpg"
     },
     {
       "name": "Balsamic Salmon",
       "price": 17.49,
       "description": "A salmon dish with green beans amandine and balsamic vinaigrette.",
-      "image": "tacobite.jpg"
+      "image": "balsamicsalmon.jpg"
     },
     {
       "name": "Pan Seared Chilean Sea Bass",
       "price": 24.49,
       "description": "Fresh bass seared in a hot skillet and topped with a lemon butter sauce.",
-      "image": "tacobite.jpg"
+      "image": "seabass.jpg"
+    },
+    {
+      "name": "House Salad",
+      "price": 13.99,
+      "description": "A healthy garden salad prepared with tomato, peppers, romaine, arugula, kale, and pumpkin.",
+      "image": "salad.jpg"
     },
     {
       "name": "Catch of the Day",
       "price": 29.99,
-      "description": "The fresh catch of the day, prepared to the chef's likings.",
-      "image": "tacobite.jpg"
+      "description": "The fresh catch of the day, prepared to the chef Tamanu's likings.",
+      "image": "jefechef.jpg"
     }
   ],
   "drinks": [
@@ -64,19 +70,19 @@
       "name": "Bourbon Street",
       "price": 11.99,
       "description": "Kentucky straight bourbon, Diplomatico 8yr rum, Benedictine, sweet vermouth and bitters... over block ice.",
-      "image": "tacobite.jpg"
+      "image": "bourbon.jpg"
     },
     {
       "name": "Mojito Verde",
       "price": 13.99,
       "description": "Aged light rum, house made lime syrup, mint, and sugar... swizzled with crushed ice",
-      "image": "tacobite.jpg"
+      "image": "mojito.jpg"
     },
     {
       "name": "Mezcalero",
       "price": 12.99,
       "description": "silver tequila, Del Maguey 'Vida' Mezcal, lime, passion fruit & pineapple cordials with orange essence... served up.",
-      "image": "tacobite.jpg"
+      "image": "tequila.jpg"
     }
   ]
 }
