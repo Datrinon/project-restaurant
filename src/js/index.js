@@ -16,7 +16,7 @@ import Menu from '../data/entrees.json';
 import Hours from '../data/schedule.csv';
 
 import RestaurantImg from '../image/beachhouse.jpg';
-import RestaurantInteriorImg from '../image/restaurant.jpg';
+import RestaurantInteriorImg from '../image/restaurantinterior.jpg';
 import mealpic1 from '../image/clams.jpg';
 import mealpic2 from '../image/lobster.jpg';
 import mealpic3 from '../image/salmon.jpg';
@@ -24,10 +24,10 @@ import mealpic3 from '../image/salmon.jpg';
 
 function importAll(r) {
 
-  // keys() get the key which is a filepath (called the request on node)
-  // map() maps the fp to an array element.
   let images = {};
-  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  // r (require.context() returns a function upon call leading to the dist dirpath)
+  // we use map to get an array that has key: src rel. filepath and value dist abs dirpath
+  r.keys().map((item) => { images[item.replace('./', '')] = r(item); });
   return images;
   // return r.keys().map(r);
 }
@@ -64,7 +64,7 @@ const menuSection = (() => {
   const c = new Component();
 
   const menu = c.section("menu");
-  const title = c.heading("Menu", 1);
+  const title = c.heading("Menu", 1, "menu-title");
 
   menu.append(title);
   menu.classList.add("no-display");
@@ -79,14 +79,9 @@ const menuSection = (() => {
   //// console.log(path.resolve('../images'));
   // remember require.context returns a function that will give you the right path... so you need to call it.
 
-  console.log(require.context('../image', false, /\.(png|jpe?g|svg)$/).keys().map((key, index) => {
-    console.log(key, index);
-    console.log(require.context('../image', false, /\.(png|jpe?g|svg)$/)(key));
-  }));
-
   for (let section in Menu) {
     let sectionDiv = c.div("menu-area");
-    let sectionHeading = c.heading(section, 2);
+    let sectionHeading = c.heading(section, 2, "menu-section-header");
 
     sectionDiv.append(sectionHeading);
     let entreesDiv = c.div("entrees-area");
@@ -97,7 +92,6 @@ const menuSection = (() => {
       let description = c.paragraph(entree.description);
       let img = c.img(images[entree.image], "entree-pic");
       
-      c.paragraph("Image here");
       entreeDiv.append(img, name, price, description);
       entreesDiv.append(entreeDiv);
     }
@@ -123,10 +117,16 @@ const visitSection =(() => {
   
   const c = new Component();
 
-  const visit = c.section("visit");
+  const visitWrapper = c.section("visit");
+  const visit = c.section("visitContent");
+
+  visitWrapper.append(visit);
+  visitWrapper.classList.add("no-display");
+  visitWrapper.style.backgroundImage = `url(${RestaurantInteriorImg})`;
+  
   const title = c.heading("Come Visit Us", 2);
 
-  const banner = c.banner("", RestaurantInteriorImg);
+  const addressScheduleWrapper = c.section("directions-schedule");
 
   const addressDiv = c.div("directions-section");
   const addrHeading = c.heading("Address", 3);
@@ -140,6 +140,8 @@ const visitSection =(() => {
   scheduleDiv.append(hourHeading, schedule);
   // alert(JSON.stringify(Hours));
 
+  addressScheduleWrapper.append(addressDiv, scheduleDiv);
+
   const contactDiv = c.div("contact-section");
   const contactHeading = c.heading("Contact Us", 3);
   const contactIcons = [c.faIcon("fab", "fa-facebook-messenger", "contact-icon"), c.faIcon("fab", "fa-instagram-square", "contact-icon")
@@ -147,13 +149,13 @@ const visitSection =(() => {
   contactDiv.append(contactHeading, ...contactIcons);
 
 
-  visit.append(title, banner, addressDiv, scheduleDiv, contactDiv); // either this is legal or I use spread
+  visit.append(title, addressScheduleWrapper, contactDiv); // either this is legal or I use spread
     // [...] was not legal
     // ...array was legal. 
     // TODO dan write this down.
     // TODO also write down this visitSection, this a good way to format 
     // code
-  return visit;
+  return visitWrapper;
 })();
 
 const onLoad = (() => {

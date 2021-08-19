@@ -154,12 +154,13 @@ export class Component {
    * @param {*} text - The label for the header.
    * @param {*} level - The level of header.
    */
-  heading(text, level) {
+  heading(text, level, ...className) {
     if (level < 1 || level > 6) {
       throw Error("Heading levels can only be between 1 to 6!");
     }
     let header = document.createElement(`h${level}`);
 
+    header.classList.add(...className);
     header.textContent = text;
 
     return header;
