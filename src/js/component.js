@@ -166,8 +166,9 @@ export class Component {
     return header;
   }
 
-  paragraph(text) {
+  paragraph(text, ...className) {
     let p = document.createElement("p");
+    p.classList.add(...className);
 
     p.textContent = text;
 

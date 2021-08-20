@@ -54,6 +54,9 @@ h3 {
 
 @media (min-width: 1342px) {
   .entrees-area {
-    justify-content: flex-start;
+    /* justify-content: flex-start;
+    position: relative;
+    left: 35px; */
   }
 }
+

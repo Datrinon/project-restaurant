@@ -15,7 +15,7 @@ import Bio from '../data/bio.txt';
 import Menu from '../data/entrees.json';
 import Hours from '../data/schedule.csv';
 
-import RestaurantImg from '../image/beachhouse.jpg';
+import RestaurantImg from '../image/splash-img.jpg';
 import RestaurantInteriorImg from '../image/restaurantinterior.jpg';
 import mealpic1 from '../image/clams.jpg';
 import mealpic2 from '../image/lobster.jpg';
@@ -36,24 +36,33 @@ const homeSection = (() => {
   const Components = new Component();
 
   const home = Components.section("home");
-  const banner = Components.banner("Enjoy outdoor dining with an ocean breeze", RestaurantImg);
+  const banner = Components.banner("Exquisite dining with an ocean view.", RestaurantImg);
+  const hookWrapper = Components.div("hook");
+  const bio = Components.div("bio");
   const hookMessage = Components.pullquote("Serving fresh Pacific catches since 2001.");
-  const homeBiography = Components.paragraph(Bio);
+  const homeBiography = Components.paragraph(Bio, "bio-text");
   const homeImgContainer = Components.div("home-images");
   const homeImages = [Components.img(mealpic1, "meal"),
       Components.img(mealpic2, "meal"),
       Components.img(mealpic3, "meal"),];
 
+  let offset = 0;
+  for (let img of homeImages) {
+    img.style.left = `${offset}vw`;
+    offset += 10;
+  }
+
   const homePullQuote = Components.pullquote("Come visit us today in Marin.")
   const homeToVisitButton = Components.button("Get Directions", "primary-button");
 
   home.append(banner);
-  home.append(hookMessage);
-  home.append(homeBiography);
+  
+  bio.append(hookMessage, homeBiography);
 
-  home.append(homeImgContainer);
   homeImgContainer.append(...homeImages);
 
+  hookWrapper.append(bio, homeImgContainer);
+  home.append(hookWrapper);
   home.append(homePullQuote, homeToVisitButton);
 
   return home;
@@ -106,8 +115,8 @@ const menuSection = (() => {
 const visitSection =(() => {
   function initializeMap(map) {
     map.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1446.0598245802353!2d-122.51133701257287!3d37.76944511330641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808587b9137328d5%3A0x5779caf7adb5889c!2sBeach%20Chalet%20Brewery%20and%20Restaurant!5e0!3m2!1sen!2sus!4v1629385295743!5m2!1sen!2sus";
-    map.width = 600;
-    map.height = 450;
+    map.width = 300;
+    map.height = 300;
     map.style.border = "0";
     map.allowFullscreen = "";
     map.setAttribute("loading", "lazy");
@@ -125,26 +134,24 @@ const visitSection =(() => {
   bg.style.backgroundImage = `url(${RestaurantInteriorImg})`;
   bg.style.zIndex = 0;
   visit.style.zIndex = 1;
-  visit.style.backgroundColor = "rgba(0,0,0,0)";
   // visit.style.backgroundImage = `url(${RestaurantInteriorImg})`; // this works ??
 
 
   visitWrapper.append(bg, visit);
   visitWrapper.classList.add("no-display");
   
-  
-  const title = c.heading("Come Visit Us", 2);
-
   const addressScheduleWrapper = c.section("directions-schedule");
 
   const addressDiv = c.div("directions-section");
-  const addrHeading = c.heading("Address", 3);
+  const addrHeading = c.heading("Address", 3, "visit-section-header");
   const address = c.paragraph("1000 Great Highway, San Francisco, CA 94121");
+  const mapFrame = c.div("map-responsive");
   const map = initializeMap(document.createElement("iframe"));
-  addressDiv.append(addrHeading, address, map);
+  mapFrame.append(map);
+  addressDiv.append(addrHeading, address, mapFrame);
   
   const scheduleDiv = c.div("schedule-section");
-  const hourHeading = c.heading("Hours", 3);
+  const hourHeading = c.heading("Hours", 3, "visit-section-header");
   const schedule = c.table("hours-table", Hours);
   scheduleDiv.append(hourHeading, schedule);
   // alert(JSON.stringify(Hours));
@@ -152,13 +159,13 @@ const visitSection =(() => {
   addressScheduleWrapper.append(addressDiv, scheduleDiv);
 
   const contactDiv = c.div("contact-section");
-  const contactHeading = c.heading("Contact Us", 3);
+  const contactHeading = c.heading("Contact Us", 3, "visit-section-header");
   const contactIcons = [c.faIcon("fab", "fa-facebook-messenger", "contact-icon"), c.faIcon("fab", "fa-instagram-square", "contact-icon")
   , c.faIcon("fab", "fa-twitter-square", "contact-icon")];
   contactDiv.append(contactHeading, ...contactIcons);
 
 
-  visit.append(title, addressScheduleWrapper, contactDiv); // either this is legal or I use spread
+  visit.append(addressScheduleWrapper, contactDiv); // either this is legal or I use spread
     // [...] was not legal
     // ...array was legal. 
     // TODO dan write this down.
