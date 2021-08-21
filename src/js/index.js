@@ -69,6 +69,10 @@ const homeSection = (() => {
 
   const homePullQuote = Components.pullquote("Come visit us today in Marin.")
   const homeToVisitButton = Components.button("Get Directions", "primary-button");
+  homeToVisitButton.addEventListener("click", (e) => {
+    document.querySelector("#home").classList.add("no-display");
+    document.querySelector("#visit").classList.remove("no-display");
+  });
 
   home.append(banner, valueStatement);
   
@@ -219,7 +223,7 @@ const onLoad = (() => {
   })
   
   /*
-  Potential issue
+  Potential issue with assignin event listener to menu button (FAS-based)
   Could be because the DOM hasn't loaded the element yet.
   maybe, because #header works OK.
   it's the way that FontAwesome works, it commented out the i and replaced
