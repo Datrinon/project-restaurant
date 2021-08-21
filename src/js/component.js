@@ -177,7 +177,7 @@ export class Component {
 
   img(url, ...className) {
     let image = new Image();
-    image.classList.add([...className]);
+    image.classList.add(...className);
 
     image.src = url;
 
@@ -186,14 +186,14 @@ export class Component {
 
   div(...className) {
     let div = document.createElement("div");
-    div.classList.add([...className]);
+    div.classList.add(...className);
 
     return div;
   }
 
   button(label, ...className) {
     let btn = document.createElement("button");
-    btn.classList.add([...className]);
+    btn.classList.add(...className);
 
     btn.textContent = label;
     return btn;

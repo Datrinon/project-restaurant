@@ -36,26 +36,41 @@ const homeSection = (() => {
   const Components = new Component();
 
   const home = Components.section("home");
-  const banner = Components.banner("Exquisite dining with an ocean view.", RestaurantImg);
+  const banner = Components.banner("", RestaurantImg);
+  const valueStatement = Components.pullquote("Exquisite dining with an ocean view.");
   const hookWrapper = Components.div("hook");
   const bio = Components.div("bio");
   const hookMessage = Components.pullquote("Serving fresh Pacific catches since 2001.");
   const homeBiography = Components.paragraph(Bio, "bio-text");
   const homeImgContainer = Components.div("home-images");
-  const homeImages = [Components.img(mealpic1, "meal"),
-      Components.img(mealpic2, "meal"),
-      Components.img(mealpic3, "meal"),];
+  const homeImages = [Components.img(mealpic1, "home-food-pic", "home-food-pic-animation"),
+      Components.img(mealpic2, "home-food-pic", "home-food-pic-animation"),
+      Components.img(mealpic3, "home-food-pic", "home-food-pic-animation"),];
 
   let offset = 0;
+  let secs = 2;
+  let opacity = 0.2;
   for (let img of homeImages) {
     img.style.left = `${offset}vw`;
     offset += 10;
+
+    img.style.animation = `slidein ${secs}s`
+    secs += 0.5;
+    
+    img.style.opacity = opacity;
+    opacity += 0.1;
+
+    img.addEventListener("animationend", (e) => {
+        e.currentTarget.style.opacity = 1;
+        e.currentTarget.classList.remove("home-food-pic-animation");
+        e.currentTarget.style.animation = null;
+    });
   }
 
   const homePullQuote = Components.pullquote("Come visit us today in Marin.")
   const homeToVisitButton = Components.button("Get Directions", "primary-button");
 
-  home.append(banner);
+  home.append(banner, valueStatement);
   
   bio.append(hookMessage, homeBiography);
 

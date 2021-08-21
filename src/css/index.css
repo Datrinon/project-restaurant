@@ -38,6 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .bio-text {
   margin: 1px 20%;
+  text-align: justify;
 }
 
 #page-title {
@@ -64,6 +65,9 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: row;
   justify-content: space-evenly;
   height: fit-content;
+  position: relative;
+  z-index: 3;
+  background-color: white;
 }
 
 #navbar {
@@ -144,7 +148,7 @@ h2 {
   justify-content: space-around;
 }
 
-.meal {
+.home-food-pic {
   min-width: 200px;
   width: 20vw;
   max-width: 400px;
@@ -155,6 +159,22 @@ h2 {
   position: relative;
 }
 
+.home-food-pic-animation {
+  animation: slidein 2s;
+  animation-iteration-count: 1;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(-15%);
+  }
+  to {
+    opacity: 1.0;
+  }
+}
+
+
+
 .primary-button {
   all: unset;
   display: block;
@@ -164,6 +184,8 @@ h2 {
   height: 3em;
   padding: 5px;
 }
+
+
 
 /* For small devices, collapse the header and navbar */
 @media (max-width: 600px) {
@@ -205,7 +227,28 @@ h2 {
     border: 1px solid black;
   }
   
-  .footer {
-    text-align: center;
+  .hook {
+    flex-direction: column;
   }
+
+  .bio > .pull-quote {
+    line-height: 1.0;
+    font-size: 1.0rem;
+    margin-top: 35px;
+  }
+  .bio {
+    width: 90%;
+    line-height: 2.0;
+  }
+  .bio-text {
+    margin: 20px 0;
+  }
+  .home-food-pic {
+    left: 0 !important;
+    width: 80vw;
+  }
+}
+
+.footer {
+  text-align: center;
 }

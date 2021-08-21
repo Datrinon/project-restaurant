@@ -62,7 +62,7 @@
   margin: 0 auto;
 }
 
-
+/* From online article : responsive google map */
 .map-responsive {
   overflow: hidden;
   padding-bottom: 56.25%;
@@ -70,11 +70,13 @@
   height: 0;
 }
 
+/* From online article : responsive google map */
 .map-responsive iframe {
   left: 0;
   top: 0;
   height: 100%;
-  width: 100%;
+  width: 90%;
+  margin: 10px 5%;
   position: absolute;
 }
 
@@ -83,4 +85,11 @@
   font-size: 1.5em;
   margin: 10px 0;
   font-variant: petite-caps;
+}
+
+@media (max-width: 600px) {
+  #visit-content {
+    margin: 5px 0;
+    width: 97%;
+  }
 }
